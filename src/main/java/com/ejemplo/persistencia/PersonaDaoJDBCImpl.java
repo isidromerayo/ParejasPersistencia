@@ -15,11 +15,12 @@ public class PersonaDaoJDBCImpl extends AbstractJDBCDao implements PersonaDao {
 		Connection cn = null;
 		try {
 			cn=dataSource.getConnection();
-			PreparedStatement pst = cn.prepareStatement("insert into personas (id,nombre,edad,altura,sexo) values (mi_sequence.nextval,?,?,?,?)");
-			pst.setString(1, persona.getNombre());
-			pst.setInt(2, persona.getEdad());
-			pst.setFloat(3, persona.getAltura());
-			pst.setString(4, Character.toString(persona.getSexo()));
+			PreparedStatement pst = cn.prepareStatement("insert into personas (id,nombre,edad,altura,sexo) values (?,?,?,?,?)");
+			pst.setLong(1, persona.getId());
+			pst.setString(2, persona.getNombre());
+			pst.setInt(3, persona.getEdad());
+			pst.setFloat(4, persona.getAltura());
+			pst.setString(5, Character.toString(persona.getSexo()));
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			//e.printStackTrace();
